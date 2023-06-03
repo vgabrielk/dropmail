@@ -5,3 +5,24 @@
 body {
   background-color: #ededed;
 }
+
+@media(max-width: 600px) {
+  .MuiPaper-root {
+    margin:  10px!important;
+    padding: 2rem!important;
+  }
+  .MuiGrid-root {
+    width: 100%!important;
+  }
+}
+
+.MuiGrid-root::-webkit-scrollbar{
+  width: 5px;
+  background-color: #dadada;
+}
+
+.MuiGrid-root::-webkit-scrollbar-thumb{
+  width: 5px;
+  background-color: #0009b9;
+  border-radius: 12px;
+}
