@@ -1,18 +1,25 @@
 
 import { useEffect, useState } from 'react'
-import './App.css'
 import Inbox from './Share/Inbox'
 import RandomEmail from './Share/RandomEmailScreen'
+import { store } from './redux/store';
 
 
 function App() {
+
+
   const [time, setTime] = useState<number>(15);
+
+    store.dispatch({
+      type: 'REFRESH_TIME',
+      payload: time
+    })
 
   function countDown(count: number = time) {
     if (count === 0) {
       setTime(15);
       count = 15;
-    };
+    };  
     setTimeout(() => {
       setTime(count - 1);
       return countDown(count - 1);
@@ -27,7 +34,7 @@ function App() {
   return (
     <>
       <RandomEmail time={time} />
-      <Inbox />
+      <Inbox time={time} />
     </>
   )
 }
