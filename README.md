@@ -25,9 +25,9 @@ O E-mail Temporário é uma solução projetada para prevenir hackers e spam ao 
 
 Estas instruções fornecerão uma cópia do projeto em execução em sua máquina local para fins de desenvolvimento e teste.
 
-### Pré-requisitos
+## Pré-requisitos
 
-O que você precisa ter instalado em sua máquina e como rodar o projeto
+O que você precisa ter instalado em sua máquina
 
 ```
 - Node 14+
@@ -36,24 +36,54 @@ O que você precisa ter instalado em sua máquina e como rodar o projeto
 - Docker
 ```
 
-<!-- ### Instalando
+## Clone o repositório 
 
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
+```git
+ssh >
+git clone git@github.com:vgabrielk/dropmail.git
 ```
 
-And repeat
-
+```git
+https >
+git clone https://github.com/vgabrielk/dropmail.git
 ```
-until finished
+
+## Variáveis de ambiente
+
+### Para rodar esse projeto, você vai precisar adicionar a seguinte variável de ambiente ao seu arquivo .env
+
+`VITE_APP_CORS_TOKEN=<temp_token>`
+
+
+### Para obter esse token que é necessário para resolver um problema de Cors presente na API do Dropmail, será preciso acessar o site https://cors.sh/.
+
+### Na página inicial terá um campo e-mail para você receber o token temporário e adicionar a variável de ambiente ao projeto.
+
+
+## Rodando projeto localmente com docker
+
+### Na pasta raiz do projeto rode o seguinte comando para fazer o build
+```shell
+  sudo docker compose build
+```
+### Após terminar o build, rode esse comando :
+```shell
+  sudo docker compose up -d
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
+### Agora precisaremos dos 3 primeiros dígitos do container para que possamos ler os logs e ver o endereço IP que está rodando nosso container
+```shell
+  sudo docker ps
+```
+```shell
+  sudo docker logs <container_number>
+```
+### Deverá aparecer um resultado parecido com esse : 
+```shell 
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.20.0.2:5173/
+```
+## Agora só colar um desses links em um browser para acessar o projeto, caso o primeiro não funcione teste o segundo. <br><br>
 
-## Usage <a name = "usage"></a>
-
-Add notes about how to use the system. -->
+## Deploy
+[![Deploy](https://img.shields.io/badge/coodesh_chalenge-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dropmail-truckpag.netlify.app/)
