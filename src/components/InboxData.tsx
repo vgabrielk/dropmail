@@ -10,6 +10,7 @@ interface PropsData {
     text?: string;
     expiresAt?: string;
     headerSubject?: string;
+    length: any;
   }
 }
 
@@ -18,7 +19,7 @@ const InboxData = ({ data }: PropsData) => {
 
   return (
     <Fragment>
-      {data ? (
+      {data.length > 0 ? (
         <>
           <Box 
            sx={{
