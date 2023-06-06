@@ -1,20 +1,24 @@
 import { Box, Button, CircularProgress, Stack, TextField, Typography } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import { Item } from "../../components/ItemComponent";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import copy from "copy-to-clipboard";
 import api from "../../services/api";
 import toast from 'react-hot-toast'
-import moment from "moment";
 
 interface Props {
   time: number;
 }
 
 const RandomEmail = (props: Props) => {
+
   const dispatch = useDispatch()
+
+  const session = sessionStorage.getItem('session') as string;
+  const email = sessionStorage.getItem('email') as string;
+  
   const generateEmailQuery = `
   mutation {
    introduceSession {
@@ -27,7 +31,6 @@ const RandomEmail = (props: Props) => {
 }
     `
   const [emailValue, setEmailValue] = useState<string>('')
-  const [expireSession, setExpireSession] = useState<string>('')
 
   const setGlobalEmailId = (id: string) => {
     dispatch({
@@ -41,9 +44,9 @@ const RandomEmail = (props: Props) => {
     try {
       const response = await api.post("/vgabrielk7", { query: generateEmailQuery })
       setEmailValue(response.data.data.introduceSession.addresses[0].address)
+      sessionStorage.setItem("email", response.data.data.introduceSession.addresses[0].address)
       setGlobalEmailId(response.data.data.introduceSession.id)
-      setExpireSession(moment(response.data.data.introduceSession.expiresAt).format('LLL'));
-      console.log(response.data.data.introduceSession.expiresAt) 
+      sessionStorage.setItem("session", response.data.data.introduceSession.id)
     } catch (err) {
       console.log(err);
     }
@@ -55,7 +58,13 @@ const RandomEmail = (props: Props) => {
   }
 
   useEffect(() => {
-    generateRandomEmail()
+    if (!session) {
+      generateRandomEmail()
+    }
+    else {
+      setGlobalEmailId(session)
+      setEmailValue(email)
+    }
   }, [])
 
   return (
@@ -105,10 +114,6 @@ const RandomEmail = (props: Props) => {
                 >{`${Math.round(props.time)}`}</Typography>
               </Box>
             </Box>
-            <span>
-              E-mail expires at :
-              {expireSession}
-            </span>
           </Box>
         </Item>
       </Stack>
