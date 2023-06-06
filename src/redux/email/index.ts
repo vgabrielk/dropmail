@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     email_id : '',
-    refreshTime: false,
-    getInboxFn : null
+    refreshTime: null,
+    loading: false,
 }
 
 export default (state = INITIAL_STATE, action : any) => {
@@ -10,8 +10,8 @@ export default (state = INITIAL_STATE, action : any) => {
             return { ...state, email_id: action.payload }
             case 'REFRESH_TIME':
             return { ...state, refreshTime: action.payload }
-            case 'GET_INBOX_FN':
-            return { ...state, getInboxFn: action.payload }
+            case 'LOADING_INBOX ':
+            return { ...state, loading: action.payload }
         default:
             return state
     }
