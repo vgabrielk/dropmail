@@ -1,16 +1,13 @@
 
 import { useEffect, useState } from 'react'
-import { store } from './redux/store';
+
 import RandomEmail from './share/RandomEmailScreen';
 import Inbox from './share/Inbox';
 
 function App() {
 
-
   const [time, setTime] = useState<number>(15);
 
-   
-  
   function countDown(count: number = time) {
     if (count === 0) {
       setTime(15);
@@ -25,7 +22,6 @@ function App() {
 
   useEffect(() => {
     countDown();
-    
   }, [])
 
   return (

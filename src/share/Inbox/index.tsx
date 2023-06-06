@@ -21,8 +21,6 @@ interface ReceivedEmails {
   downloadUrl: string;
 }
 
-
-
 const Inbox = (props: Props) => {
 
   const id = useSelector((state: any) => state.email.email_id);
@@ -70,7 +68,6 @@ const Inbox = (props: Props) => {
         <Item sx={{ margin: "0 3rem", marginBottom: "2rem" }}>
           <Box sx={{ display: 'flex', marginBottom: '1.5rem' }}>
             <h1>Inbox</h1>
-
             <Button onClick={getInboxData}>
               <RefreshIcon />
             </Button>
@@ -86,25 +83,29 @@ const Inbox = (props: Props) => {
                 marginBottom: "20px",
               }}
             >
-              {inbox?.map((item: ReceivedEmails, index) => (
-                <Box
-                  key={index}
-                  onClick={() => {
-                    setActiveInbox(item);
-                  }}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    border: "1px solid #e0e0e0",
-                    padding: 2,
-                    boxSizing: "border-box",
-                    cursor: "pointer",
-                  }}
-                >
-                  <h4>{item.headerSubject}</h4>
-                  <span>{item.fromAddr}</span>
-                </Box>
-              ))}
+              {inbox?.length > 0 ? (
+                <Fragment>
+                  {inbox?.map((item: ReceivedEmails, index) => (
+                    <Box
+                      key={index}
+                      onClick={() => {
+                        setActiveInbox(item);
+                      }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        border: "1px solid #e0e0e0",
+                        padding: 2,
+                        boxSizing: "border-box",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <h4>{item.headerSubject}</h4>
+                      <span>{item.fromAddr}</span>
+                    </Box>
+                  ))}
+                </Fragment>
+              ) : 'No email in inbox'}
             </Grid>
             <Grid sx={{
               overflowY: "scroll",

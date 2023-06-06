@@ -16,6 +16,17 @@ body {
   }
 }
 
+@media(max-width: 400px) {
+  .MuiPaper-root {
+    margin:  10px!important;
+    padding: 1.4rem!important;
+  }
+  .MuiGrid-root {
+    width: 100%!important;
+  }
+}
+
+
 .MuiGrid-root::-webkit-scrollbar{
   width: 5px;
   background-color: #dadada;
