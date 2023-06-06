@@ -1,14 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { ApolloProvider } from '@apollo/client'
-import { client } from './lib/appolo.ts'
+import { Provider } from "react-redux";
+import { store } from "./redux/store.ts";
+import {Toaster} from 'react-hot-toast'
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <ApolloProvider client={client}>
+import ReactDOM from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+    <Provider store={store}>
+      <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
       <App />
-    </ApolloProvider>
-  </React.StrictMode>,
-)
+    </Provider>
+);

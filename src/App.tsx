@@ -1,18 +1,21 @@
 
 import { useEffect, useState } from 'react'
-import './App.css'
-import Inbox from './Share/Inbox'
-import RandomEmail from './Share/RandomEmailScreen'
-
+import { store } from './redux/store';
+import RandomEmail from './share/RandomEmailScreen';
+import Inbox from './share/Inbox';
 
 function App() {
+
+
   const [time, setTime] = useState<number>(15);
 
+   
+  
   function countDown(count: number = time) {
     if (count === 0) {
       setTime(15);
       count = 15;
-    };
+    };  
     setTimeout(() => {
       setTime(count - 1);
       return countDown(count - 1);
@@ -22,12 +25,13 @@ function App() {
 
   useEffect(() => {
     countDown();
+    
   }, [])
 
   return (
     <>
       <RandomEmail time={time} />
-      <Inbox />
+      <Inbox time={time} />
     </>
   )
 }
