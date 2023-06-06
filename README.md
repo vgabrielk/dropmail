@@ -21,6 +21,9 @@ O E-mail Temporário é uma solução projetada para prevenir hackers e spam ao 
 - Cors.sh
 
 
+
+
+
 ## Iniciando <a name = "getting_started"></a>
 
 Estas instruções fornecerão uma cópia do projeto em execução em sua máquina local para fins de desenvolvimento e teste.
@@ -83,7 +86,7 @@ git clone https://github.com/vgabrielk/dropmail.git
   ➜  Local:   http://localhost:5173/
   ➜  Network: http://172.20.0.2:5173/
 ```
-## Agora só colar um desses links em um browser para acessar o projeto, caso o primeiro não funcione teste o segundo. <br><br>
+#### Agora só colar um desses links em um browser para acessar o projeto, caso o primeiro não funcione teste o segundo. <br><br>
 
 ## Deploy
 [![Deploy](https://img.shields.io/badge/coodesh_chalenge-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dropmail-truckpag.netlify.app/)
