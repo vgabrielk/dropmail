@@ -47,7 +47,6 @@ const Inbox = (props: Props) => {
   const getInboxData = async () => {
     try {
       const response = await api.post("/vgabrielk7", { query: getInboxDataQuery });
-      console.log(response.data)
       setInbox(response.data.data.session?.mails)
     } catch (err) {
       console.log(err);
