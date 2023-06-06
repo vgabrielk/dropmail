@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  client:
+    stdin_open: true
+    build:
+      context: .
+      dockerfile: Dockerfile 
+    container_name: dropmail
+    restart: always
+    volumes:
+     - "./:/app"
+     - "./:/node_modules"
+    command: npm run dev
+    
+    ports:
+      - 5173:5173
