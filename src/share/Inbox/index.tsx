@@ -7,7 +7,6 @@ import api from "../../services/api";
 import InboxData from "../../components/InboxData";
 import RefreshIcon from '@mui/icons-material/Refresh';
 
-
 interface Props {
   time: number;
 }
@@ -22,44 +21,57 @@ interface ReceivedEmails {
 }
 
 const Inbox = (props: Props) => {
-
   const id = useSelector((state: any) => state.email.email_id);
+  const session = sessionStorage.getItem('session') as string;
 
   const [inbox, setInbox] = useState<ReceivedEmails[]>([]);
   const [activeInbox, setActiveInbox] = useState({})
+  const [inboxLength, setInboxLength] = useState(0);
 
   const getInboxDataQuery = `
-  query {
-    session(id: "${id}") {
-      expiresAt
-        mails{
-            rawSize,
-            fromAddr,
-            toAddr,
-            downloadUrl,
-            text,
-            headerSubject
+    query {
+      session(id: "${id}") {
+        expiresAt
+        mails {
+          rawSize
+          fromAddr
+          toAddr
+          downloadUrl
+          text
+          headerSubject
         }
+      }
     }
-}
   `
 
   const getInboxData = async () => {
     try {
       const response = await api.post("/vgabrielk7", { query: getInboxDataQuery });
-      setInbox(response.data.data.session?.mails)
+      setInbox(response.data.data.session?.mails);
+      setInboxLength(response.data.data.session?.mails.length || 0);
+      localStorage.setItem('inboxlength', JSON.stringify(inboxLength));
     } catch (err) {
       console.log(err);
     }
   };
 
-  if (props.time == 1) {
-    getInboxData()
+  const sendEmailNotification = () => {
+    Notification.requestPermission().then((permission) => {
+      if (permission === "granted") {
+        new Notification("Tem e-mail novo pra você - Dropmail!");
+      }
+    });
   }
 
   useEffect(() => {
+    if (inboxLength > parseInt(localStorage.getItem('inboxlength') || '0')) {
+      sendEmailNotification();
+    }
+  }, [inboxLength]);
+
+  useEffect(() => {
     getInboxData();
-  }, [id]);
+  }, [id, props.time]);
 
   return (
     <Fragment>
