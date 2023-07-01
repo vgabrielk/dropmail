@@ -91,5 +91,3 @@ git clone https://github.com/vgabrielk/dropmail.git
 ## Deploy
 [![Deploy](https://img.shields.io/badge/coodesh_chalenge-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://dropmail-truckpag.netlify.app/)
 
-## Link do vídeo de apresentação : 
-https://github.com/vgabrielk/dropmail
